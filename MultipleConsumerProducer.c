@@ -24,7 +24,7 @@ void Put(char item) {
 	nextIn = (nextIn + 1) % BUFF_SIZE; 
 	sem_post(&mutex);
 	printf("Thread with id: %lu Producing %c ...\n", pthread_self(),  item);
-	sem_post(&empty_slots);
+	sem_post(&full_slot);
 }
 
 void * Producer() {
@@ -42,7 +42,7 @@ void Get(char item) {
 	nextOut = (nextOut + 1) % BUFF_SIZE; 
 	sem_post(&mutex);
 	printf("Thread with id: %lu Consuming %c ...\n", pthread_self(), item);
-	sem_post(&full_slot);
+	sem_post(&empty_slots);
 }
 
 void * Consumer() {

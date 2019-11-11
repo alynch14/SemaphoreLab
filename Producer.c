@@ -32,7 +32,7 @@ void Put(char item)
   s->buffer[s->nextIn] = item;
   s->nextIn = (s->nextIn + 1) % BUFF_SIZE;
   sem_post(mutex);
-  printf("Producing %c ...\n", item);
+  printf("Process %d: Producing %c ...\n", getpid(), item);
   sem_post(full_slots);
 }
 
